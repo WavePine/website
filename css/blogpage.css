@@ -28,13 +28,17 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 2000;
+    z-index: 3000;
 }
 
 .nav-left {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.off-screen-menu.active {
+    max-height: 500px;
 }
 
 .digitalmindlogo {
@@ -51,7 +55,8 @@ nav {
     display: flex;
     list-style: none;
     gap: 25px;
-    margin-left: 00px;
+    margin-left: 100px;
+
 }
 
 .main_nav ul li a {
@@ -64,11 +69,7 @@ nav {
 .main_nav ul li a:hover {
     color: #dcfd8b; /* Lime green hover */
 }
-
-/* --- 3. Layout Sections --- */
 .page {
-        /* min-height: 100vh; */
-
     display: block;
     padding-top: 40px; /* Space for fixed nav */
 }
@@ -180,82 +181,154 @@ form input, form textarea {
 }
 
 
-/* --- Off-screen-menu --- */
+/* --- Dropdown Menu --- */
 .off-screen-menu {
     background-color: rgb(34, 37, 49);
-    height: 100vh;
-    width: 100%;
-    max-width: 450px;
     position: fixed;
-    top: 0;
-    right: -450px;            /* Hidden */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: .3s ease;
-    z-index: 1000;
+    top: 80px; /* Navbar height */
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    z-index: 3000;
 }
 
 .off-screen-menu.active {
-    right: 0;                 /* Slides in */
+    max-height: 400px;
 }
 
 .off-screen-menu ul {
     list-style: none;
-    padding: 0;
+    padding: 20px 0;
     text-align: center;
 }
 
 .off-screen-menu li {
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .off-screen-menu a {
     color: white;
     text-decoration: none;
-    font-size: 2rem;
+    font-size: 1.5rem;
     transition: 0.3s;
 }
 
 .off-screen-menu a:hover {
-    color: #253168;
+    color: #dcfd8b;
 }
 
 /* --- Hamburger Icon --- */
 .ham-menu {
+    display: none; /* Hidden on desktop */
     height: 50px;
     width: 50px;
-    margin-left: auto;
     position: relative;
     cursor: pointer;
-    z-index: 1100;
+    z-index: 4000;
 }
 
 .ham-menu span {
-    height: 5px;
-    width: 100%;
-    background-color: #ffffff;
-    border-radius: 25px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: .3s ease;
+    width: 100%;
+    height: 5px;
+    background-color: white;
+    border-radius: 25px;
+    transition: 0.3s ease;
 }
 
-.ham-menu span:nth-child(1) { top: 25%; }
-.ham-menu span:nth-child(3) { top: 75%; }
+.ham-menu span:nth-child(1) {
+    top: 10px;
+}
 
-/* --- Hamburger Animations --- */
+.ham-menu span:nth-child(2) {
+    top: 22px;
+}
+
+.ham-menu span:nth-child(3) {
+    top: 34px;
+}
+
+/* --- Hamburger Animation --- */
 .ham-menu.active span:nth-child(1) {
-    transform: translate(-50%, -50%) rotate(45deg);
-    top: 50%;
+    top: 22px;
+    transform: rotate(45deg);
 }
-.ham-menu.active span:nth-child(2) { 
-    opacity: 0; 
+
+.ham-menu.active span:nth-child(2) {
+    opacity: 0;
 }
+
 .ham-menu.active span:nth-child(3) {
-    transform: translate(-50%, -50%) rotate(-45deg);
-    top: 50%;
+    top: 22px;
+    transform: rotate(-45deg);
+}
+
+/* --- Mobile View --- */
+@media (max-width: 768px) {
+
+    /* Hide desktop nav links */
+    .main_nav {
+        display: none;
+    }
+
+    /* Show hamburger */
+    .ham-menu {
+        display: block;
+    }
+
+    /* Stack hero content */
+    .pos_cen {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .webimage {
+        width: 100%;
+    }
+}
+/* --- Desktop View --- */
+@media (min-width: 769px) {
+
+    .off-screen-menu {
+        display: none;
+    }
+}
+
+/* This makes the items sit in a row */
+.grid_container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Keeps it mobile friendly */
+}
+
+/* This makes each box the same size */
+.item {
+    width: 250px; 
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* This makes every image exactly the same size */
+.item img {
+    width: 100%;       /* Fills the 250px box */
+    height: 200px;      /* Forces all images to be this height */
+    object-fit: cover;  /* This is the magic: it crops instead of stretching */
+    border-radius: 8px;
+}
+
+.item h4 {
+    margin: 10px 0 5px 0;
+    text-transform: capitalize;
+}
+
+.item a {
+    color: purple;
+    font-size: 0.9rem;
+    text-decoration: underline;
 }
