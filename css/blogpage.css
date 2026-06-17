@@ -42,7 +42,7 @@ nav {
 }
 
 .digitalmindlogo {
-    height: 50px; /* Adjusted for better fit */
+    height: 80px; /* Adjusted for better fit */
     width: auto;
 }
 
@@ -96,6 +96,14 @@ footer {
 .webimage {
     width: 35%;
     border-radius: 5px;
+}
+
+.off-screen-menu {
+    pointer-events: none;
+}
+
+.off-screen-menu.active {
+    pointer-events: auto;
 }
 
 /* About & Careers Styling */
